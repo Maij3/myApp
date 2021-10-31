@@ -1,0 +1,184 @@
+.container {
+    width: 1200px;
+    margin: auto;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+.container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div#navbarSupportedContent {
+    display: flex !important;
+    flex-direction: initial;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+}
+
+table.table.caption-top {
+    /*background: #000;*/
+    color: #fff;
+    padding: 10px;
+}
+
+ul.navbar-nav.me-auto.mb-2.mb-lg-0 {
+    display: flex;
+    justify-content: space-around;
+    width: 700px;
+    list-style: none;
+}
+
+a.navbar-brand {
+    color: #fff !important;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+button.navbar-toggler {
+    display: none;
+}
+
+a.nav-link {
+    color: #fff !important;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+input.form-control.me-2 {
+    padding: 5px;
+}
+
+button.btn.btn-outline-success {
+    padding: 5px;
+    margin-left: 10px;
+    color: green;
+    border: 1px solid green;
+}
+
+form.d-flex {
+    display: flex;
+}
+
+.form-control {
+    width: 200px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+/*Btn*/
+
+.boton-group {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    -webkit-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    -moz-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    -ms-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    -o-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+/*Table*/
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-accent-bg: transparent;
+    --bs-table-striped-color: #212529;
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.05) !important;
+    --bs-table-active-color: #212529 !important;
+    --bs-table-active-bg: rgba(0, 0, 0, 0.1) !important;
+    --bs-table-hover-color: #212529 !important;
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075) !important;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+}
+
+.caption-top {
+    caption-side: top;
+    /* display: inline-block; */
+}
+
+.btn-group button {
+    margin-right: 5px;
+}
+
+@media only screen and (min-width:768px) and (max-width:1199px) {
+    ul.navbar-nav.me-auto.mb-2.mb-lg-0 {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:979px) {
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+        background: unset !important;
+    }
+    a.nav-link {
+        color: #000 !important;
+    }
+}
+
+td {
+    color: #000;
+    background: #fff;
+    text-align: center !important;
+}
+
+thead {
+    background: #000;
+    color: #fff;
+    text-align: center;
+}
+
+tr {
+    color: #000;
+    text-align: center;
+}

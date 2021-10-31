@@ -1,0 +1,13 @@
+.modal {
+    display: block !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid;
+    width:500px;
+    height:322px;
+}
+
+.fade:not(.show) {
+    opacity: 1 !important;
+}
