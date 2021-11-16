@@ -1,6 +1,6 @@
 import React from "react";
 
-function InputText({tipo="text", nombreCampo , onInput = () =>{}}) {
+function InputText({tipo="text",value , nombreCampo , onInput = () =>{}}) {
     return (
         <div className="form-row">
             <div className="col">
@@ -11,6 +11,7 @@ function InputText({tipo="text", nombreCampo , onInput = () =>{}}) {
                     id={nombreCampo} 
                     placeholder={nombreCampo} 
 	    	    onInput = {onInput}
+	    	    value = {value}
                     />
             </div>
         </div>

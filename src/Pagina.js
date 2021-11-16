@@ -2,8 +2,63 @@ import React, { Component } from 'react';
 import Nav from './componentes/Nav/nav.js';
 import Tabla from "./componentes/Tabla/tabla.js";
 import Modal from "./componentes/Modal/modal.js";
+import Input from "./componentes/Modal/inputText.js";
+import Select from "./componentes/Modal/Select.js";
 import ActionsMenu from "./componentes/ActionsMenu/actionsmenu.js";
-import {ListarEntidad , CrearEditarEntidad} from "./servicio.js";
+import {
+	ListarEntidad , 
+	CrearEditarEntidad , 
+	eliminarEntidad
+			} 
+	from "./servicio.js";
+
+const tiposMascota = [
+	{valor: "Perro" , etiqueta:"Perro"},
+	{valor: "Gato" , etiqueta:"Gato"},
+	{valor: "Pajaro" , etiqueta:"Pajaro"},
+	{valor: "Otro" , etiqueta:"Otro"},
+]
+const duenos = [
+	{valor:"Esteban" , etiqueta:"Esteban"},
+	{valor:"Julian" , etiqueta:"Julian"},
+	{valor:"Jhon" , etiqueta:"Jhon"},
+	{valor:"Felix" , etiqueta:"Felix"},
+	{valor:"Camilo" , etiqueta:"Camilo"},
+]
+const ComponentCampo = ({
+			manejarInput = () =>{},
+			objeto = {},
+			nombreCampo="",
+		}) => {	
+	switch (nombreCampo) {
+		case 'Raza':
+			{console.log(nombreCampo)}
+			return (
+				<Select
+					nombreCampo = {nombreCampo}
+					options = {tiposMascota} 	
+					onChange = {manejarInput} 
+					placeholder = "Tipo Animal" 
+					value={objeto.Raza}  
+				/>
+			);
+		case 'Nombre':
+			return (
+				<Input 
+					tipo="text" 
+					onInput = {manejarInput}  
+					nombreCampo={nombreCampo}
+					placeholder = {nombreCampo}
+					value={objeto.Nombre}
+				/>
+			);
+		case 'Peso':
+		case 'Edad':
+		case 'Apellido':
+		case 'Dni':							
+	}			
+};
+
 class Pagina extends Component{
 	constructor(props){
 		super(props);
@@ -11,18 +66,27 @@ class Pagina extends Component{
 			mostrarModal: false,
 			entidades:[],
 			objeto:[],
+			idObjeto:null,
+			method:"POST",
+			columnas:[],
 		};
 	}
 	//Codigo Componente
-	cambiarModal = () =>{
-		this.setState({mostrarModal: !this.state.mostrarModal});
+	cambiarModal = (_evento , method = "POST") =>{
+		this.setState({mostrarModal: !this.state.mostrarModal , 
+				method
+			});
 	};
 
 	//Listar Mascotas
 	listar =  async () =>{
 		const {entidad} = this.props;
 		const entidades = await ListarEntidad({entidad});
-		this.setState({entidades});
+		let columnas = [];
+		if(Array.isArray(entidades) && entidades.length > 0){
+			columnas = Object.keys(entidades[0]) || [];
+		}
+		this.setState({entidades , columnas});
 	}
 	//Manejador De Input 
 		manejarInput = (evento)=>{
@@ -41,25 +105,34 @@ class Pagina extends Component{
 	//Crear Entidad 
 	crearEntidad = async () =>{
 		const {entidad} = this.props;
-		const {objeto} = this.state;
-		const method = "POST";
-		console.log({objeto});
-		await CrearEditarEntidad({entidad , objeto , method});
+		const {objeto , method , idObjeto} = this.state;
+		//console.log({objeto});
+		await CrearEditarEntidad({
+				entidad , 
+				objeto , 
+				method , 
+				idObjeto
+			});
 		this.cambiarModal();
 		this.listar();
 	}
 	
 	//Editar 
-	editarEntidad = async (evento , index) =>{
-		//const {target} = evento;
-		console.log({index});
-		/*const {entidad} = this.props;
-		const {objeto} = this.state;
-		const method = "POST";
-		console.log({objeto});
-		await CrearEditarEntidad({entidad , objeto , method});
-		this.cambiarModal();
-		this.listar();*/
+	editarEntidad =  (_evento , index) =>{
+		const objeto  = {...this.state.entidades[index]};
+		this.setState({objeto , idObjeto: index},() => {
+		this.cambiarModal(null,"PUT");
+		});	
+	}
+	//Eliminar
+	eliminarEntidad =  async (_evento , index ) =>{
+		const {entidad} = this.props;
+		const respuesta =  await eliminarEntidad({
+				entidad , 
+				idObjeto: index
+				});
+		console.log({respuesta});
+		this.listar();
 	}
 	componentDidMount(){
 		this.listar();
@@ -67,19 +140,36 @@ class Pagina extends Component{
 	//El metodo render siempre debe ir de ultimo
 	render(){
 		const {titulo = "No Tenemos Titulo"} = this.props;
+		const {columnas} = this.state;
 			return (
 			<>
 			<div className="container">
 			<Nav titulo = {titulo} />
 			<ActionsMenu cambiarModal = {this.cambiarModal} />
-			<Tabla  entidades = {this.state.entidades} 
-				editarEntidad = {this.editarEntidad}/>
+			<Tabla  
+				entidades = {this.state.entidades} 
+				editarEntidad = {this.editarEntidad}
+				eliminarEntidad = {this.eliminarEntidad}
+				columnas = {columnas}
+				/>
 			</div>
-			{this.state.mostrarModal && ( <Modal 
+			{this.state.mostrarModal && ( 
+				<Modal 
 				cambiarModal = {this.cambiarModal} 
 				manejarInput = {this.manejarInput} 
-				crearEntidad = {this.crearEntidad} 
-				/>
+				crearEntidad = {this.crearEntidad}
+				objeto = {this.state.objeto}
+				>
+				{columnas.map((columna , index) => {
+				 (<ComponentCampo
+						key = {index}
+						manejarInput = {this.manejarInput}
+						objeto = {this.state.objeto}
+						nombreCampo = {columna}
+					/>)
+				 })}
+				</Modal>
+
 			)}
 			</>
 		);

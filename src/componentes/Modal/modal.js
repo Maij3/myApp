@@ -5,10 +5,16 @@ import "./modal.css";
 import "./Select.js";
 import Select from "./Select.js";
 import InputText from "./inputText.js";
-import ModalFooter from "./Modalfooter.js"
-function Modal({cambiarModal =() => {}, manejarInput =() => {} , crearEntidad =() => {} }) {
+import ModalFooter from "./Modalfooter.js";
+function Modal({cambiarModal =() => {}, 
+	manejarInput =() => {} , 
+	crearEntidad =() => {} , 
+	objeto = {},
+	children = {},
+	}) {
+		console.log({objeto});
 	return (
-		<div 	className="modal fade" 
+		<div className="modal fade" 
 			id="exampleModal" 
 			tabIndex="-1" 
 			aria-labelledby="exampleModalLabel" 
@@ -22,59 +28,14 @@ function Modal({cambiarModal =() => {}, manejarInput =() => {} , crearEntidad =(
 
 		<div className="modal-body">
 		<form action="" id="form">
-		<div className="form-row">
-		<div className="col">
-
-		<input 
-			type="hidden" 
-			name="indice" 
-			id="indice" 
-		/>
-
-		<InputText 
-			tipo="text" 
-			onInput = {manejarInput}  
-			nombreCampo="Nombre" 
-		/>
-		</div>
-		</div>
-
-		<div className="form-row">
-		<div className="col">
-
-		<InputText 
-			tipo="number" 
-			onInput = {manejarInput} 
-			nombreCampo="Peso" 
-		/>
-
-		</div>
-		</div>
-
-		<div className="form-row">
-		<div className="col">
-
-		<InputText 
-			tipo="number" 
-			onInput = {manejarInput} 
-			nombreCampo="Edad" 
-		/>
-
-		</div>
-		</div>
-
-		<div className="form-row">
-		<Select options = {[	
-			{valor: "Pastor Aleman" , etiqueta:"Pastor Aleman"},
-			{valor: "Labrador" , etiqueta:"Labrador"},
-			{valor: "Bulldog" , etiqueta:"Bulldog"},
-			{valor: "Golden retriver", etiqueta:"Golden retriver"},
-			{valor: "Poodle", etiqueta:"Poodle" },
-		]} onChange = {manejarInput} nombreCampo = "Raza"/>
-		</div>
+			<div className="form-row">
+				{console.log(children)}
+			</div>
 		</form>
 		</div>
-		< ModalFooter cambiarModal = {cambiarModal} crearEntidad = {crearEntidad} />	
+		< ModalFooter 
+			cambiarModal = {cambiarModal} 
+			crearEntidad = {crearEntidad} />	
 		</div>
 		</div>
 

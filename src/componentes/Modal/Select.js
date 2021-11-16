@@ -1,13 +1,14 @@
 import React from "react";
 
 
-function Select ({options =[], nombreCampo = "", onChange = ()=> {}}){
+function Select ({options =[], nombreCampo = "",value="", onChange = ()=> {}}){
     return (
       <select 	
 	    	className="form-select" 
 	    	aria-label="Default select example" 
 	    	onChange = {onChange}
 	    	name = {nombreCampo}
+	    	defaultValue={value}
 	    >
           <option value="">Seleccione {nombreCampo}</option>
           {options.map(({ valor , etiqueta }, index) => (

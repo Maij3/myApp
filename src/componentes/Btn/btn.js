@@ -8,8 +8,7 @@ function BtnAction({index ,tipo, onClick =()=>{}}){
 			"btn-info": tipo ==="editar",
 			"btn-danger": tipo === "eliminar",
 		})}
-		onClick = {onClick}
-		data-index = {index}
+		onClick = {(e) => onClick(e,index)}
 		>
 		{ tipo === "editar" && <FontAwesomeIcon icon={faEdit} /> }
 		{ tipo === "eliminar" && <FontAwesomeIcon icon={faTrashAlt} /> }

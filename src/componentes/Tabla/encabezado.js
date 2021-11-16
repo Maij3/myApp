@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Encabezado (props){
-	console.log(props);
 	if(props.columnas.length === 0)
 		return false;
 	return (
