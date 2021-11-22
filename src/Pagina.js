@@ -25,21 +25,20 @@ const duenos = [
 	{valor:"Felix" , etiqueta:"Felix"},
 	{valor:"Camilo" , etiqueta:"Camilo"},
 ]
-const ComponentCampo = ({
+/* const ComponentCampo = ({
 			manejarInput = () =>{},
 			objeto = {},
 			nombreCampo="",
 		}) => {	
 	switch (nombreCampo) {
-		case 'Raza':
-			{console.log(nombreCampo)}
+		case "Raza":
 			return (
 				<Select
 					nombreCampo = {nombreCampo}
 					options = {tiposMascota} 	
 					onChange = {manejarInput} 
 					placeholder = "Tipo Animal" 
-					value={objeto.Raza}  
+					value={objeto[nombreCampo]}  
 				/>
 			);
 		case 'Nombre':
@@ -49,16 +48,23 @@ const ComponentCampo = ({
 					onInput = {manejarInput}  
 					nombreCampo={nombreCampo}
 					placeholder = {nombreCampo}
-					value={objeto.Nombre}
+					value={objeto[nombreCampo]}
 				/>
 			);
 		case 'Peso':
 		case 'Edad':
 		case 'Apellido':
-		case 'Dni':							
+		case 'Dni':	
+		debugger;						
 	}			
 };
-
+{console.log({ComponentCampo})}*/
+const ComponentCampo = {
+	Nombre: Input,
+	Peso:Input,
+	Edad: Input,
+	Raza: Select
+}
 class Pagina extends Component{
 	constructor(props){
 		super(props);
@@ -89,7 +95,7 @@ class Pagina extends Component{
 		this.setState({entidades , columnas});
 	}
 	//Manejador De Input 
-		manejarInput = (evento)=>{
+	manejarInput = (evento)=>{
 			const { 
 				target:{value, name}, 
 			} = evento;
@@ -100,7 +106,7 @@ class Pagina extends Component{
 			//Se Cambia El Estado Del Objeto
 			this.setState({objeto});
 			console.log({ value , name , evento });		
-		};
+	};
 
 	//Crear Entidad 
 	crearEntidad = async () =>{
@@ -160,13 +166,18 @@ class Pagina extends Component{
 				crearEntidad = {this.crearEntidad}
 				objeto = {this.state.objeto}
 				>
+				{console.log(columnas)}		
 				{columnas.map((columna , index) => {
-				 (<ComponentCampo
-						key = {index}
-						manejarInput = {this.manejarInput}
-						objeto = {this.state.objeto}
-						nombreCampo = {columna}
-					/>)
+						const Component = ComponentCampo[columna];
+						console.log({Component});
+						return <Component />;	
+						/*(<ComponentCampo
+							key = {index}
+							manejarInput = {this.manejarInput}
+							objeto = {this.state.objeto}
+							nombreCampo = {columna}
+										/>)*/
+													
 				 })}
 				</Modal>
 

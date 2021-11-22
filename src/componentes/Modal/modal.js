@@ -10,9 +10,8 @@ function Modal({cambiarModal =() => {},
 	manejarInput =() => {} , 
 	crearEntidad =() => {} , 
 	objeto = {},
-	children = {},
-	}) {
-		console.log({objeto});
+	children = [],
+	}) {	
 	return (
 		<div className="modal fade" 
 			id="exampleModal" 
@@ -29,7 +28,7 @@ function Modal({cambiarModal =() => {},
 		<div className="modal-body">
 		<form action="" id="form">
 			<div className="form-row">
-				{console.log(children)}
+					{children}
 			</div>
 		</form>
 		</div>
