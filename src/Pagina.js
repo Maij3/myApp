@@ -25,12 +25,24 @@ const duenos = [
 	{valor:"Felix" , etiqueta:"Felix"},
 	{valor:"Camilo" , etiqueta:"Camilo"},
 ]
-/* const ComponentCampo = ({
+const ComponentCampo = ({
 			manejarInput = () =>{},
 			objeto = {},
 			nombreCampo="",
 		}) => {	
 	switch (nombreCampo) {
+		case "Nombre":
+		case "Peso":
+		case "Edad":
+		return (
+				<Input 
+					tipo="text" 
+					onInput = {manejarInput}  
+					nombreCampo={nombreCampo}
+					placeholder = {nombreCampo}
+					value={objeto[nombreCampo]}
+				/>
+			);
 		case "Raza":
 			return (
 				<Select
@@ -40,31 +52,15 @@ const duenos = [
 					placeholder = "Tipo Animal" 
 					value={objeto[nombreCampo]}  
 				/>
-			);
-		case 'Nombre':
-			return (
-				<Input 
-					tipo="text" 
-					onInput = {manejarInput}  
-					nombreCampo={nombreCampo}
-					placeholder = {nombreCampo}
-					value={objeto[nombreCampo]}
-				/>
-			);
-		case 'Peso':
-		case 'Edad':
-		case 'Apellido':
-		case 'Dni':	
-		debugger;						
+			);						
 	}			
 };
-{console.log({ComponentCampo})}*/
-const ComponentCampo = {
+/*const ComponentCampo = {
 	Nombre: Input,
 	Peso:Input,
 	Edad: Input,
 	Raza: Select
-}
+}*/
 class Pagina extends Component{
 	constructor(props){
 		super(props);
@@ -168,15 +164,15 @@ class Pagina extends Component{
 				>
 				{console.log(columnas)}		
 				{columnas.map((columna , index) => {
-						const Component = ComponentCampo[columna];
+						/*const Component = ComponentCampo[columna];
 						console.log({Component});
-						return <Component />;	
-						/*(<ComponentCampo
+						return <Component />;*/	
+						return<ComponentCampo
 							key = {index}
 							manejarInput = {this.manejarInput}
 							objeto = {this.state.objeto}
 							nombreCampo = {columna}
-										/>)*/
+										/>
 													
 				 })}
 				</Modal>
