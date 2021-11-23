@@ -34,6 +34,15 @@ const ComponentCampo = ({
 		case "Nombre":
 		case "Peso":
 		case "Edad":
+		case "Apellido":
+		case "Dni":
+		case "mascota":
+		case "veterinaria":
+		case "fechaCreacion":
+		case "fechaEdicion":
+		case "dueno":
+		case "descripcion":
+		case "diagnostico":	 									
 		return (
 				<Input 
 					tipo="text" 
