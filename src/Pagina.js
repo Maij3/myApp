@@ -32,7 +32,7 @@ const tiposMascota = [{
         valor: "Otro",
         etiqueta: "Otro"
     },
-]
+]//
 const duenos = [{
         valor: "Esteban",
         etiqueta: "Esteban"
