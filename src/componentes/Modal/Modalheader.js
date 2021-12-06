@@ -1,8 +1,10 @@
 import React from "react";
 
-function Modalheader( {cambiarModal = () => {}}){
-	return(
-		<div className="modal-header">
+function Modalheader({
+    cambiarModal = () => {}
+}) {
+    return (
+        <div className="modal-header">
 
 		<h5 
 			className="modal-title" 
@@ -20,6 +22,6 @@ function Modalheader( {cambiarModal = () => {}}){
 
 		</div>
 
-	);
+    );
 }
 export default Modalheader;

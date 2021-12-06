@@ -1,9 +1,11 @@
 import React from "react";
 
 
-function ActionsMenu({ cambiarModal = () => { } }) {
-	return (
-		<div className="boton-group">
+function ActionsMenu({
+    cambiarModal = () => {}
+}) {
+    return (
+        <div className="boton-group">
 			<button 
 				onClick={cambiarModal} 
 				type="button" 
@@ -14,7 +16,7 @@ function ActionsMenu({ cambiarModal = () => { } }) {
 			</button>
 		</div>
 
-	);
+    );
 
 }
 export default ActionsMenu;

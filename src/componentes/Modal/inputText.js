@@ -1,10 +1,11 @@
 import React from "react";
 
-function InputText({tipo="text",
-                    value , 
-                    nombreCampo , 
-                    onInput = () =>{}
-                }) {
+function InputText({
+    tipo = "text",
+    value,
+    nombreCampo,
+    onInput = () => {}
+}) {
     return (
         <div className="form-row">
             <div className="col">

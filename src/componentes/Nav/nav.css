@@ -39,6 +39,7 @@ a.navbar-brand {
     color: #fff !important;
     text-decoration: none;
     font-size: 30px;
+    text-transform: capitalize;
 }
 
 button.navbar-toggler {
