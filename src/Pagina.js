@@ -1,59 +1,58 @@
 import React, {
     Component
-} from 'react';
-import Nav from './componentes/Nav/nav.js';
+} from "react";
+import Nav from "./componentes/Nav/nav.js";
 import Tabla from "./componentes/Tabla/tabla.js";
 import Modal from "./componentes/Modal/modal.js";
 import ActionsMenu from "./componentes/ActionsMenu/actionsmenu.js";
-import ComponentCampo from './componentes/ComponentCampo/index.js';
+import ComponentCampo from "./componentes/ComponentCampo/index.js";
 import {
     obtenerUno
-} from "./servicio.js"
+} from "./servicio.js";
 import {
     ListarEntidad,
     CrearEditarEntidad,
-    eliminarEntidad
-}
-from "./servicio.js";
+    eliminarEntidad,
+} from "./servicio.js";
 
 const tiposMascota = [{
         valor: "Perro",
-        etiqueta: "Perro"
+        etiqueta: "Perro",
     },
     {
         valor: "Gato",
-        etiqueta: "Gato"
+        etiqueta: "Gato",
     },
     {
         valor: "Pajaro",
-        etiqueta: "Pajaro"
+        etiqueta: "Pajaro",
     },
     {
         valor: "Otro",
-        etiqueta: "Otro"
+        etiqueta: "Otro",
     },
-]//
+]; //
 const duenos = [{
         valor: "Esteban",
-        etiqueta: "Esteban"
+        etiqueta: "Esteban",
     },
     {
         valor: "Julian",
-        etiqueta: "Julian"
+        etiqueta: "Julian",
     },
     {
         valor: "Jhon",
-        etiqueta: "Jhon"
+        etiqueta: "Jhon",
     },
     {
         valor: "Felix",
-        etiqueta: "Felix"
+        etiqueta: "Felix",
     },
     {
         valor: "Camilo",
-        etiqueta: "Camilo"
+        etiqueta: "Camilo",
     },
-]
+];
 /* const ComponentCampo = ({
 			manejarInput = () =>{},
 			objeto = {},
@@ -106,40 +105,39 @@ const duenos = [{
 const opcionesIniciales = {
     Raza: [{
             valor: "Perro",
-            etiqueta: "Perro"
+            etiqueta: "Perro",
         },
         {
             valor: "Gato",
-            etiqueta: "Gato"
+            etiqueta: "Gato",
         },
         {
             valor: "Pajaro",
-            etiqueta: "Pajaro"
+            etiqueta: "Pajaro",
         },
         {
             valor: "Otro",
-            etiqueta: "Otro"
+            etiqueta: "Otro",
         },
     ],
     diagnostico: [{
             valor: "Prurito de piel (sarna)",
-            etiqueta: "Prurito de piel (sarna)"
+            etiqueta: "Prurito de piel (sarna)",
         },
         {
             valor: "Moquillo",
-            etiqueta: "Moquillo"
+            etiqueta: "Moquillo",
         },
         {
             valor: "Trauma cefalico",
-            etiqueta: "Trauma cefalico"
+            etiqueta: "Trauma cefalico",
         },
         {
             valor: "Parvovirosis",
-            etiqueta: "Parvovirosis"
+            etiqueta: "Parvovirosis",
         },
     ],
-}
-
+};
 
 class Pagina extends Component {
     constructor(props) {
@@ -158,7 +156,7 @@ class Pagina extends Component {
     cambiarModal = (_evento, method = "POST") => {
         this.setState({
             mostrarModal: !this.state.mostrarModal,
-            method
+            method,
         });
     };
 
@@ -168,7 +166,7 @@ class Pagina extends Component {
             entidad
         } = this.props;
         const entidades = await ListarEntidad({
-            entidad
+            entidad,
         });
         let columnas = [];
         if (Array.isArray(entidades) && entidades.length > 0) {
@@ -176,10 +174,10 @@ class Pagina extends Component {
         }
         this.setState({
             entidades,
-            columnas
+            columnas,
         });
         this.listar();
-    }
+    };
     //Manejador De Input
     manejarInput = (evento) => {
         const {
@@ -197,12 +195,12 @@ class Pagina extends Component {
         };
         //Se Cambia El Estado Del Objeto
         this.setState({
-            objeto
+            objeto,
         });
         console.log({
             value,
             name,
-            evento
+            evento,
         });
     };
 
@@ -221,17 +219,15 @@ class Pagina extends Component {
             entidad,
             objeto,
             method,
-            idObjeto
+            idObjeto,
         });
         this.cambiarModal();
         this.listar();
-    }
+    };
 
     //Editar
     editarEntidad = async (_evento, index) => {
-        //30-11-2021 MODIFICACION
-        /*const objeto = { ...this.state.entidades[index]
-        };*/
+
         const {
             entidad
         } = this.props;
@@ -240,16 +236,52 @@ class Pagina extends Component {
         } = this.setState;
         const objeto = await obtenerUno({
             entidad,
-            idObjeto: index
+            idObjeto: index,
         });
+        const mascotasPromise = ListarEntidad({
+            entidad: "mascotas"
+        });
+
+        const veterinariasPromise = ListarEntidad({
+            entidad: "veterinaria"
+        });
+        const duenosPromise = ListarEntidad({
+            entidad: "duenos"
+        });
+        let [mascota, veterinaria, dueno] = await Promise.all([
+            mascotasPromise,
+            veterinariasPromise,
+            duenosPromise,
+        ]);
+        mascota = mascota.map((_mascota, index) => ({
+            valor: index,
+            etiqueta: `${_mascota.Nombre} (${_mascota.Raza})`,
+        }));
+        veterinaria = veterinaria.map((_veterinaria, index) => ({
+            valor: index,
+            etiqueta: `${_veterinaria.Nombre} (${_veterinaria.Apellido})`,
+        }));
+        dueno = dueno.map((_dueno, index) => ({
+            valor: index,
+            etiqueta: `${_dueno.Nombre} (${_dueno.Dni})`,
+        }));
+        const nuevasOpciones = { ...options,
+            mascota,
+            veterinaria,
+            dueno
+        }
+        //  setOptions(nuevasOpciones);
         //30-11-2021 MODIFICACION
         this.setState({
-            objeto,
-            idObjeto: index
-        }, () => {
-            this.cambiarModal(null, "PUT");
-        });
-    }
+                objeto,
+                idObjeto: index,
+                options: nuevasOpciones,
+            },
+            () => {
+                this.cambiarModal(null, "PUT");
+            }
+        );
+    };
     //Eliminar
     eliminarEntidad = async (_evento, index) => {
         const {
@@ -257,13 +289,13 @@ class Pagina extends Component {
         } = this.props;
         const respuesta = await eliminarEntidad({
             entidad,
-            idObjeto: index
+            idObjeto: index,
         });
         console.log({
-            respuesta
+            respuesta,
         });
         this.listar();
-    }
+    };
     componentDidMount() {
         this.listar();
     }
@@ -276,78 +308,44 @@ class Pagina extends Component {
         const {
             columnas,
             idObjeto,
-            entidades
+            entidades,
+	    options,
         } = this.state;
-        return ( <
-            div className = "container" >
-            <
-            Nav titulo = {
-                entidad
-            }
-            /> <
-            ActionsMenu cambiarModal = {
-                this.cambiarModal
-            }
-            /> <
-            Tabla entidades = {
-                entidades
-            }
-            editarEntidad = {
-                this.editarEntidad
-            }
-            eliminarEntidad = {
-                this.eliminarEntidad
-            }
-            columnas = {
-                columnas
-            }
-            /> {
-                this.state.mostrarModal && ( <
-                        Modal cambiarModal = {
-                            this.cambiarModal
-                        }
-                        manejarInput = {
-                            this.manejarInput
-                        }
-                        crearEntidad = {
-                            this.crearEntidad
-                        }
-                        //objeto = {this.state.objeto}
-                        entidad = {
-                            entidad
-                        }
-                        idObjeto = {
-                            idObjeto
-                        } >
-                        {
-                            columnas.map((columna, index) => {
-                                    return ( <
-                                        ComponentCampo key = {
-                                            index
-                                        }
-                                        manejarInput = {
-                                            this.manejarInput
-                                        }
-                                        objeto = {
-                                            this.state.objeto
-                                        }
-                                        nombreCampo = {
-                                            columna
-                                        }
-                                        />)
-                                    })
-                            } <
-                            /Modal>
-
-                        )
-                    }
-
-                    <
-                    /div>
-            );
-
-        }
-
+        return (
+            <div className="container">
+        <Nav titulo={entidad} />
+        <ActionsMenu cambiarModal={this.cambiarModal} />
+        <Tabla
+          entidades={entidades}
+          editarEntidad={this.editarEntidad}
+          eliminarEntidad={this.eliminarEntidad}
+          columnas={columnas}
+        />
+        {this.state.mostrarModal && (
+          <Modal
+            cambiarModal={this.cambiarModal}
+            manejarInput={this.manejarInput}
+            crearEntidad={this.crearEntidad}
+            //objeto = {this.state.objeto}
+            entidad={entidad}
+            idObjeto={idObjeto}
+          >
+            {columnas.map((columna, index) => {
+              return (
+                <ComponentCampo
+                  key={index}
+                  manejarInput={this.manejarInput}
+                  objeto={this.state.objeto}
+                  nombreCampo={columna}
+		  options = {options}
+                />
+              );
+            })}
+          </Modal>
+        )}
+      </div>
+        );
     }
+}
 
-    export default Pagina;
+export default Pagina;

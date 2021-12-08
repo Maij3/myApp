@@ -53,64 +53,13 @@ function ComponentCampo({
     manejarInput = () => {},
     objeto = {},
     nombreCampo = "",
+    options = {},
 }) {
     
     //console.log('ComponentCampo');
-    const [options, setOptions] = useState(opcionesIniciales);
-    useEffect(() => {
-        const obtenerOptionsBackend = async () => {
-            const mascotasPromise = ListarEntidad({
-                entidad: 'mascotas'
-            });
-            const veterinariasPromise = ListarEntidad({
-                entidad: 'veterinaria'
-            });
-            const duenosPromise = ListarEntidad({
-                entidad: 'duenos'
-            });
-            let [mascota,
-                veterinaria,
-                dueno
-            ] = await Promise.all([
-                mascotasPromise,
-                veterinariasPromise,
-                duenosPromise,
-            ]);
-            /*console.log('uno', {
-                mascota,
-                veterinaria,
-                dueno
-	    });*/
-            mascota = mascota.map(
-                (_mascota, index) => ({
-                    valor: index,
-                    etiqueta: `${_mascota.Nombre}(${_mascota.Raza})`,
-                }));
-            veterinaria = veterinaria.map(
-                (_veterinaria, index) => ({
-                    valor: index,
-                    etiqueta: `${_veterinaria.Nombre}(${_veterinaria.Apellido})`,
-                }));
-            dueno = dueno.map(
-                (_dueno, index) => ({
-                    valor: index,
-                    etiqueta: `${_dueno.Nombre}(${_dueno.Apellido})`,
-                }));
-            const nuevasOpciones = {
-                ...options,
-                mascota,
-                veterinaria,
-                dueno
-            }
-            setOptions(nuevasOpciones);
-            /*console.log("dos", {
-                mascota,
-                veterinaria,
-                dueno
-	    });*/
-        }
-        obtenerOptionsBackend();
-    }, []);
+    //const [options, setOptions] = useState(opcionesIniciales);
+    /*useEffect(() => {
+    }, []);*/
     switch (nombreCampo) {
         case "Nombre":
         case "Peso":
