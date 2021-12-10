@@ -4,9 +4,6 @@ import React, {
 } from "react";
 import Input from "../Modal/inputText";
 import Select from "../Modal/Select";
-import {
-    ListarEntidad
-} from "../../servicio";
 
 const opcionesIniciales = {
     Raza: [{
@@ -69,7 +66,8 @@ function ComponentCampo({
         case "fechaCreacion":
         case "fechaEdicion":
         case "descripcion":
-
+        case "Raza":
+        case "diagnostico":
             return (
                 <Input
 				tipo="text"
@@ -79,20 +77,29 @@ function ComponentCampo({
 				value={objeto[nombreCampo]}
 				/>
             );
-        case "Raza":
         case "dueno":
-        case "diagnostico":
         case "mascota":
+		    console.log(options);
         case "veterinaria":
             return (
-                <Select
+		    <>
+		    {Object.keys(options).length > 0 ? (
+			    <Select
 				nombreCampo = {nombreCampo}
 				options = {options[nombreCampo]}
 				onChange = {manejarInput}
 				placeholder = "Tipo Animal"
+				defaultValue={objeto[nombreCampo]}    
+				selectedValue={objeto[nombreCampo]}
 				value={objeto[nombreCampo]}
 				/>
+		    ) 
+		    	: ("Cargar opciones"
+			
+			)}
+		   </>	    
             );
+		    debugger
         default:
             return false;
     }

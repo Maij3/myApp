@@ -15,44 +15,6 @@ import {
     eliminarEntidad,
 } from "./servicio.js";
 
-const tiposMascota = [{
-        valor: "Perro",
-        etiqueta: "Perro",
-    },
-    {
-        valor: "Gato",
-        etiqueta: "Gato",
-    },
-    {
-        valor: "Pajaro",
-        etiqueta: "Pajaro",
-    },
-    {
-        valor: "Otro",
-        etiqueta: "Otro",
-    },
-]; //
-const duenos = [{
-        valor: "Esteban",
-        etiqueta: "Esteban",
-    },
-    {
-        valor: "Julian",
-        etiqueta: "Julian",
-    },
-    {
-        valor: "Jhon",
-        etiqueta: "Jhon",
-    },
-    {
-        valor: "Felix",
-        etiqueta: "Felix",
-    },
-    {
-        valor: "Camilo",
-        etiqueta: "Camilo",
-    },
-];
 /* const ComponentCampo = ({
 			manejarInput = () =>{},
 			objeto = {},
@@ -104,7 +66,7 @@ const duenos = [{
 }*/
 const opcionesIniciales = {
     Raza: [{
-            valor: "Perro",
+	    valor: "Perro",
             etiqueta: "Perro",
         },
         {
@@ -137,6 +99,9 @@ const opcionesIniciales = {
             etiqueta: "Parvovirosis",
         },
     ],
+	mascota:[],
+	veterinaria:[],
+	dueno:[],
 };
 
 class Pagina extends Component {
@@ -254,15 +219,15 @@ class Pagina extends Component {
             duenosPromise,
         ]);
         mascota = mascota.map((_mascota, index) => ({
-            valor: index,
+            valor: index.toString(),
             etiqueta: `${_mascota.Nombre} (${_mascota.Raza})`,
         }));
         veterinaria = veterinaria.map((_veterinaria, index) => ({
-            valor: index,
+            valor: index.toString(),
             etiqueta: `${_veterinaria.Nombre} (${_veterinaria.Apellido})`,
         }));
         dueno = dueno.map((_dueno, index) => ({
-            valor: index,
+            valor: index.toString(),
             etiqueta: `${_dueno.Nombre} (${_dueno.Dni})`,
         }));
         const nuevasOpciones = { ...options,
@@ -309,6 +274,7 @@ class Pagina extends Component {
             columnas,
             idObjeto,
             entidades,
+	    objeto,	
 	    options,
         } = this.state;
         return (
@@ -335,7 +301,7 @@ class Pagina extends Component {
                 <ComponentCampo
                   key={index}
                   manejarInput={this.manejarInput}
-                  objeto={this.state.objeto}
+                  objeto={objeto}
                   nombreCampo={columna}
 		  options = {options}
                 />
