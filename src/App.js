@@ -7,56 +7,52 @@ import {
 //import Nav from "./componentes/Nav/nav.js";
 
 function App() {
-    return ( <
-        div className = "container" >
+    return (
+        <div className = "container" >
+            <Routes>
+                <Route exact path = "/"
+                    element = { 
+                        <Pagina
+                            titulo = "Mascotas"
+                            entidad = "mascotas" /
+                        >
+                    }
+                />
 
-        <
-        Routes >
-        <
-        Route exact path = "/"
-        element = { <
-            Pagina
-            titulo = "Mascotas"
-            entidad = "mascotas" /
-            >
-        }
-        />
-
-        <
-        Route path = "/mascotas"
-        element = { <
-            Pagina
-            titulo = "Mascotas"
-            entidad = "mascotas" /
-            >
-        }
-        /> <
-        Route path = "/veterinarias"
-        element = { <
-            Pagina
-            titulo = "Veterinaria"
-            entidad = "veterinaria" /
-            >
-        }
-        /> <
-        Route path = "/duenos"
-        element = { <
-            Pagina
-            titulo = "Duenos"
-            entidad = "duenos" /
-            >
-        }
-        /> <
-        Route path = "/consultas"
-        element = { <
-            Pagina
-            titulo = "Consultas"
-            entidad = "consultas" /
-            >
-        }
-        /> 
-	</Routes> 
-    </div>
+                <Route path = "/mascotas"
+                    element = { 
+                        <Pagina
+                            titulo = "Mascotas"
+                            entidad = "mascotas" /
+                        >
+                    }
+                /> 
+                <Route path = "/veterinarias"
+                    element = { 
+                        <Pagina
+                            titulo = "Veterinaria"
+                            entidad = "veterinaria" /
+                        >
+                    }
+                /> 
+                <Route path = "/duenos"
+                    element = { 
+                        <Pagina
+                            titulo = "Duenos"
+                            entidad = "duenos" /
+                        >
+                    }
+                /> 
+                <Route path = "/consultas"
+                    element = { 
+                        <Pagina
+                            titulo = "Consultas"
+                            entidad = "consultas" /
+                        >
+                    }
+                /> 
+	        </Routes> 
+        </div>
     );
 }
 

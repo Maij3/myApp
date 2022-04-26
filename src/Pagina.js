@@ -15,55 +15,8 @@ import {
     eliminarEntidad,
 } from "./servicio.js";
 
-/* const ComponentCampo = ({
-			manejarInput = () =>{},
-			objeto = {},
-			nombreCampo="",
-			options = [],
-		}) => {
-	switch (nombreCampo) {
-		case "Nombre":
-		case "Peso":
-		case "Edad":
-		case "Apellido":
-		case "Dni":
-		case "mascota":
-		case "veterinaria":
-		case "fechaCreacion":
-		case "fechaEdicion":
-		case "descripcion":
-		case "diagnostico":
-		return (
-				<Input
-					tipo="text"
-					onInput = {manejarInput}
-					nombreCampo={nombreCampo}
-					placeholder = {nombreCampo}
-					value={objeto[nombreCampo]}
-				/>
-			);
-		case "Raza":
-		case "dueno":
-			return (
-				<Select
-					nombreCampo = {nombreCampo}
-					options = {options}
-					onChange = {manejarInput}
-					placeholder = "Tipo Animal"
-					value={objeto[nombreCampo]}
-				/>
-			);
-		default:
-			return false;
-	}
-};
-*/
-/*const ComponentCampo = {
-	Nombre: Input,
-	Peso:Input,
-	Edad: Input,
-	Raza: Select
-}*/
+import {Prueba} from "./Js/main.js";
+
 const opcionesIniciales = {
     Raza: [{
 	    valor: "Perro",
@@ -103,6 +56,8 @@ const opcionesIniciales = {
 	veterinaria:[],
 	dueno:[],
 };
+
+//
 
 class Pagina extends Component {
     constructor(props) {
@@ -188,6 +143,7 @@ class Pagina extends Component {
         });
         this.cambiarModal();
         this.listar();
+	Prueba();    
     };
 
     //Editar

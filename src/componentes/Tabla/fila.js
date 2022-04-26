@@ -5,8 +5,8 @@ const evaluarCampo = ({
     entidad,
     columna
 }) => {
-    //console.log({entidad});
-    //console.log({columna});
+  // console.log({entidad});
+  console.log({columna});
     //console.log('entidad[columna]}' , entidad.mascota.Nombre);
     if (columna === "veterinaria") {
         return `${entidad[columna].Nombre}`;

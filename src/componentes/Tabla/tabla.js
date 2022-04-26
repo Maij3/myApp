@@ -11,6 +11,7 @@ function Tabla({
     eliminarEntidad = () => {},
     columnas = [],
 }) {
+    console.log({entidades})
     //const columnas = entidades.length > 0 ? Object.keys(entidades[0]):[];
     return <section id="tabla">
 		<div className="container" id="contenedor">
